@@ -3,4 +3,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
+    <string name="layouttag">Layouttag</string>
+    <string name="tapitemmsg">Please tap on Top Tabs to change text</string>
+    <string name="redtext">Red</string>
+    <string name="greentext">Green</string>
+    <string name="bluetext">Blue</string>
+
 </resources>
