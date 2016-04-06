@@ -8,5 +8,11 @@
     <string name="redtext">Red</string>
     <string name="greentext">Green</string>
     <string name="bluetext">Blue</string>
+    <string name="modeoftransport">Mode of Transport:</string>
+    <string name="cartxt">Car - </string>
+    <string name="traintxt">Train - </string>
+    <string name="navigate">Navigate</string>
+    <string name="errormsg">Some error has occurred. Please try again.</string>
+
 
 </resources>

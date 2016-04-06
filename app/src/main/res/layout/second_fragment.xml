@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="place"
+            type="com.test.testandroidproject.models.DistanceData" />
+
+    </data>
+
+    <LinearLayout
+        style="@style/OuterContainerLayout"
+        android:padding="10dp">
+
+        <Spinner
+            android:id="@+id/places"
+            style="@style/SpinnerStyle"></Spinner>
+
+        <TextView
+            style="@style/MiddleTextView"
+            android:text="@string/modeoftransport" />
+
+        <LinearLayout style="@style/MiddleContainers">
+
+            <TextView
+                style="@style/MiddleTextView"
+                android:text="@string/cartxt" />
+
+            <TextView
+                android:id="@+id/car"
+                style="@style/MiddleTextView"
+                android:text="@{place.car}"/>
+        </LinearLayout>
+
+        <LinearLayout style="@style/MiddleContainers">
+
+            <TextView
+                style="@style/MiddleTextView"
+                android:text="@string/traintxt" />
+
+            <TextView
+                android:id="@+id/train"
+                style="@style/MiddleTextView"
+                android:text="@{place.train}"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/navigate_btn"
+            style="@style/NavigateButtonStyle"
+            android:text="@string/navigate" />
+
+    </LinearLayout>
+</layout>

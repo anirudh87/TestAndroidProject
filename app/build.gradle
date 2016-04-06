@@ -1,8 +1,18 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.databinding'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 
     defaultConfig {
         applicationId "com.test.testandroidproject"
@@ -11,6 +21,16 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    productFlavors {
+        debugbuild {
+            applicationId = "com.test.testandroidproject"
+        }
+        finalrelease {
+            applicationId = "com.test.testandroidproject.finalrelease"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
