@@ -1,7 +1,9 @@
 package com.test.testandroidproject.fragments;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.test.testandroidproject.R;
+import com.test.testandroidproject.databinding.PagerItemLayoutBinding;
+import com.test.testandroidproject.models.PagerFragmentViewModel;
 
 public class PagerFragment extends Fragment {
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-    public static final PagerFragment newInstance(String message)
-    {
+    private PagerItemLayoutBinding mBinding;
+    String message;
+
+    public static PagerFragment newInstance(String message) {
         PagerFragment f = new PagerFragment();
         Bundle bdl = new Bundle(1);
         bdl.putString(EXTRA_MESSAGE, message);
@@ -26,21 +32,30 @@ public class PagerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String message = getArguments().getString(EXTRA_MESSAGE);
-        View v = inflater.inflate(R.layout.pager_item_layout, container, false);
+        message = getArguments().getString(EXTRA_MESSAGE);
+        PagerFragmentViewModel pagerViewModel = new PagerFragmentViewModel();
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.pager_item_layout, container, false);
+        mBinding.setPagerfragmentVM(pagerViewModel);
+        View v = mBinding.getRoot();
 
-        LinearLayout pagerOuter = (LinearLayout) v.findViewById(R.id.pager_outer);
-        pagerOuter.setTag(R.string.layouttag, message);
-        pagerOuter.setOnClickListener(new View.OnClickListener() {
+        pagerViewModel.setPagertext(message);
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mBinding.pagerOuter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = (String) v.getTag(R.string.layouttag);
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
         });
-        TextView messageTextView = (TextView)v.findViewById(R.id.tv_pagertext);
-        messageTextView.setText(message);
 
-        return v;
+
+
+
+
     }
 }

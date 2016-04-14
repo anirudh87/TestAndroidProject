@@ -1,6 +1,7 @@
 package com.test.testandroidproject.fragments;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import com.test.testandroidproject.R;
 import com.test.testandroidproject.adapters.CustomViewPagerAdapter;
+import com.test.testandroidproject.databinding.FirstfragmentLayoutBinding;
+import com.test.testandroidproject.models.FirstFragmentViewModel;
 
 
 public class FirstFragment extends Fragment implements View.OnClickListener{
@@ -27,11 +30,16 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
     private TextView selectedText;
     private LinearLayout bottomBtnsContainer;
     Button redBtn, greenBtn, blueBtn;
+    private FirstfragmentLayoutBinding mBinding;
+    FirstFragmentViewModel firstFragmentViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = getActivity();
-        return inflater.inflate(R.layout.firstfragment_layout, container, false);
+        firstFragmentViewModel = new FirstFragmentViewModel();
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.firstfragment_layout, container, false);
+        mBinding.setFirstfragmentVM(firstFragmentViewModel);
+        return mBinding.getRoot();
     }
 
     @Override
@@ -47,14 +55,14 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         pager = (ViewPager) view.findViewById(R.id.pager);
         pager.setAdapter(new CustomViewPagerAdapter(getActivity().getSupportFragmentManager()));
 
-        selectedText = (TextView) view.findViewById(R.id.selected_textview);
         bottomBtnsContainer = (LinearLayout) view.findViewById(R.id.bottom_btns_container);
-        redBtn = (Button) view.findViewById(R.id.red_btn);
-        greenBtn = (Button) view.findViewById(R.id.green_btn);
-        blueBtn = (Button) view.findViewById(R.id.blue_btn);
-        redBtn.setOnClickListener(this);
-        greenBtn.setOnClickListener(this);
-        blueBtn.setOnClickListener(this);
+
+        firstFragmentViewModel.setLefttextview(getResources().getString(R.string.textview1));
+        firstFragmentViewModel.setMidtextview(getResources().getString(R.string.textview2));
+        firstFragmentViewModel.setRighttextview(getResources().getString(R.string.textview3));
+        mBinding.redBtn.setOnClickListener(this);
+        mBinding.greenBtn.setOnClickListener(this);
+        mBinding.blueBtn.setOnClickListener(this);
     }
 
     public void setTabs() {
@@ -64,8 +72,10 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Toast.makeText(mContext, tab.getText().toString(), Toast.LENGTH_SHORT).show();
-                selectedText.setText(tab.getText());
+                String selectedTabValue = tab.getText().toString();
+                if(selectedTabValue != null) {
+                    firstFragmentViewModel.setSelectedtextview(selectedTabValue);
+                }
             }
 
             @Override

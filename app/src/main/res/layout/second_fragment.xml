@@ -4,7 +4,7 @@
     <data>
 
         <variable
-            name="place"
+            name="distancedata"
             type="com.test.testandroidproject.models.DistanceData" />
 
     </data>
@@ -15,7 +15,7 @@
 
         <Spinner
             android:id="@+id/places"
-            style="@style/SpinnerStyle"></Spinner>
+            style="@style/SpinnerStyle" />
 
         <TextView
             style="@style/MiddleTextView"
@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/car"
                 style="@style/MiddleTextView"
-                android:text="@{place.car}"/>
+                android:text="@{distancedata.car}"/>
         </LinearLayout>
 
         <LinearLayout style="@style/MiddleContainers">
@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/train"
                 style="@style/MiddleTextView"
-                android:text="@{place.train}"/>
+                android:text="@{distancedata.train}"/>
         </LinearLayout>
 
         <Button

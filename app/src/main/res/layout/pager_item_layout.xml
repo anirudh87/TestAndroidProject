@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager_outer"
-    style="@style/PagerItemOuterContainer"
-    >
-    <TextView
-        android:id="@+id/tv_pagertext"
-        style="@style/PagerItemTextViewStyle"
-        />
-</LinearLayout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="pagerfragmentVM"
+            type="com.test.testandroidproject.models.PagerFragmentViewModel" />
+    </data>
+    <LinearLayout
+        android:id="@+id/pager_outer"
+        style="@style/PagerItemOuterContainer">
+
+        <TextView
+            android:id="@+id/tv_pagertext"
+            style="@style/PagerItemTextViewStyle"
+            android:text="@{pagerfragmentVM.pagertext}"
+            />
+    </LinearLayout>
+</layout>

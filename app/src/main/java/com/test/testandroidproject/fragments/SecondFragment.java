@@ -42,18 +42,14 @@ public class SecondFragment extends Fragment implements CallBack, View.OnClickLi
         mContext = getActivity();
         commObj = new CommunicationManager(mContext);
         binding = DataBindingUtil.inflate(inflater, R.layout.second_fragment, container, false);
-        View view = binding.getRoot();
-
-
-        return view;
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         placesSpinner = (Spinner) view.findViewById(R.id.places);
-        navigateBtn = (Button) view.findViewById(R.id.navigate_btn);
-        navigateBtn.setOnClickListener(this);
+        binding.navigateBtn.setOnClickListener(this);
         loadLocationsData();
     }
 
@@ -81,12 +77,11 @@ public class SecondFragment extends Fragment implements CallBack, View.OnClickLi
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         selectedPosition = position;
                         Place objPlace = arPlaces[position];
-                        binding.setPlace(objPlace.getFromcentral());
+                        binding.setDistancedata(objPlace.getFromcentral());
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parentView) {
-                        // your code here
                     }
 
                 });
@@ -108,7 +103,6 @@ public class SecondFragment extends Fragment implements CallBack, View.OnClickLi
                 locationData.putDouble(Constants.LONGITUDE, arPlaces[selectedPosition].getLocation().getLongitude());
                 locationData.putString(Constants.PLACE, arPlaces[selectedPosition].getName());
             }
-
             newFragment.setArguments(locationData);
             ((MainActivity) getActivity()).replaceFragment(newFragment);
         }
